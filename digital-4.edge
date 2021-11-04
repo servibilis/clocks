@@ -357,7 +357,7 @@ $(function(){
 
     window.addEventListener("message", (event) => {
         if( event.data.type === "theme" ){
-          let dark =  'dark' in event.data;
+          let dark =  'dark' in event.data  && event.data.dark === true;
           clock.removeClass().addClass(dark === true ? 'dark' : 'light');
         }
     }, false);

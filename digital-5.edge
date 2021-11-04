@@ -394,14 +394,6 @@ const animator = () => {
 // init
 window.requestAnimationFrame(animator)
 
-// toggle button
-window.addEventListener("message", (event) => {
-  if( event.data.type === "theme" ){
-    let dark =  'dark' in event.data;
-    clock.removeClass().addClass(dark === true ? 'dark-theme' : 'light-theme');
-  }
-}, false);
-
 </script>
 </body>
 </html>
