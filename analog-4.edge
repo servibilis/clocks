@@ -214,19 +214,6 @@ body {
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
-
 $(function () {
     "use strict";
     var $sec = $("#second");

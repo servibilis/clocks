@@ -25,7 +25,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   background: #D9D7DD;
 }
 
@@ -106,19 +106,6 @@ body {
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
-
 var inc = 1000;
 
 clock();

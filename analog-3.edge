@@ -1,6 +1,5 @@
 // #!/exasol/edge/package/frame
 // #command clock a3
-// #second-command 
 // #icon fas fa-clock
 // #section command
 // #label clock
@@ -44,7 +43,7 @@
 
 <style>
 html,body{
-            height: 100%;
+            height: 90%;
             margin: 0;
             padding: 0;
             background-image:linear-gradient(#e7e7e7,#d7d7d7);
@@ -206,38 +205,24 @@ html,body{
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
-
 (function(){
+    //generate clock animations
+    var now       = new Date(),
+        hourDeg   = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
+        minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
+        secondDeg = now.getSeconds() / 60 * 360,
+        stylesDeg = [
+            "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
+            "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
+            "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}",
+            "@-moz-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
+            "@-moz-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
+            "@-moz-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
+        ].join("");
 
-            //generate clock animations
-            var now       = new Date(),
-                hourDeg   = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
-                minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
-                secondDeg = now.getSeconds() / 60 * 360,
-                stylesDeg = [
-                    "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                    "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                    "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
-                ].join("");
+    document.getElementById("clock-animations").innerHTML = stylesDeg;
 
-            document.getElementById("clock-animations").innerHTML = stylesDeg;
-
-        })();
+})();
 </script>
 </body>
 </html>

@@ -15,7 +15,6 @@
 
 <style>
 
-
 body{
   margin: 0;
   background: hsla(180, 95%, 15%, 1);
@@ -34,19 +33,6 @@ canvas {
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
-
 
 var c = document.getElementById('canv');
 var $ = c.getContext('2d'); 

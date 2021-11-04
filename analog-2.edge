@@ -26,7 +26,6 @@
   </div>
 </div>
 
-
 <style>
 html {
   background: #ff9998;
@@ -174,18 +173,6 @@ body {
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
 
 const secondHand = document.querySelector('.second-hand');
 const minsHand = document.querySelector('.min-hand');

@@ -32,7 +32,7 @@
 body {
   margin: 0;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   background: radial-gradient(circle at 50% 50%, #eeeeee 0%, #333 100%);
   font-family: 'PT Mono';
 }
@@ -175,18 +175,6 @@ li.active {
 
 </style>
 <script>
-function sendToParent(type, message, parameters) {
-  document.body.insertAdjacentHTML('beforeend', `<div><span style="display:inline-block;width:100px">[${type}]</span> ${message} (${JSON.stringify(parameters)})</div>`);
-  window.parent.postMessage({
-    "type": type,
-    "message": message,
-    "parameters": parameters,
-  }, "*");
-}
-
-window.addEventListener('message', function(event){
-    console.log( event.data );
-}, false);
 
 function draw(){
   for(i=0;i<60;i++){
