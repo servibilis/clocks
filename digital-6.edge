@@ -1,0 +1,224 @@
+// #!/exasol/edge/package/frame
+// #command clock d6
+// #icon fas fa-clock
+// #section command
+// #label clock
+
+// start //
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+</head>
+<body class="no-scroll">
+  <div id="app"></div>
+<style>
+body {
+  background: black;
+  display: flex;
+  align-items: center;
+  height: 90vh;
+}
+
+.App {
+  width: 100vw;
+  height: 156px;
+  display: flex;
+  background: #000000;
+  position: relative;
+  font-family: "sans-serif";
+  font-weight: 700;
+}
+
+.text-overlay {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 160px;
+  box-sizing: border-box;
+}
+.text-overlay div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  width: 25%;
+}
+
+.Column {
+  height: 156px;
+  flex: 1 0 auto;
+  position: relative;
+  mix-blend-mode: multiply;
+  z-index: 2;
+  align-items: center;
+}
+
+.Marker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #019CDF;
+  opacity: 1;
+  border-radius: 2px;
+  overflow: hidden;
+  -webkit-animation: hueylewisandthenews 10s infinite;
+          animation: hueylewisandthenews 10s infinite;
+}
+.Marker--seconds {
+  transition: height 1s linear;
+}
+.Marker::before {
+  height: 20px;
+  width: calc(760px * 2);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wave.jpg);
+  position: absolute;
+  top: 0px;
+  content: "";
+  -webkit-animation: wave 10s infinite linear;
+          animation: wave 10s infinite linear;
+}
+
+@-webkit-keyframes wave {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -760px;
+  }
+}
+
+@keyframes wave {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -760px;
+  }
+}
+@-webkit-keyframes hueylewisandthenews {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(-30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+@keyframes hueylewisandthenews {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(-30deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+
+</style>
+<script>
+var App = React.createClass({ displayName: "App",
+  getInitialState: function () {
+    return this.getDate();
+  },
+  getDate: function () {
+    var newdate = new Date();
+    var date = {};
+
+    date.hours = newdate.getHours();
+    date.minutes = newdate.getMinutes();
+    date.seconds = newdate.getSeconds();
+
+    return date;
+  },
+  updateDate: function () {
+    this.setState(this.getDate());
+  },
+  renderDate: function () {
+    var secondOffset = date.seconds / 60 * 100 + '%';
+    var minuteOffset = date.minutes / 60 * 100 + '%';
+    var hourOffset = date.hours / 24 * 100 + '%';
+
+    var secondopacity = date.seconds / 60 * 100 / 100;
+    var minuteopacity = date.minutes / 60 * 100 / 100;
+    var houropacity = date.hours / 24 * 100 / 100;
+  },
+  componentDidMount: function () {
+    var that = this;
+    setInterval(function () {
+      that.updateDate();
+    }, 1000);
+  },
+  render: function () {
+    return /*#__PURE__*/(
+      React.createElement("div", { className: "App" }, /*#__PURE__*/
+      React.createElement(Marker, { type: "hours", time: this.state.hours }), /*#__PURE__*/
+      React.createElement(Marker, { type: "minutes", time: this.state.minutes }), /*#__PURE__*/
+      React.createElement(Marker, { type: "seconds", time: this.state.seconds }), /*#__PURE__*/
+      React.createElement("div", { className: "text-overlay" }, /*#__PURE__*/
+      React.createElement(Timer, { type: "hours", time: this.state.hours }), /*#__PURE__*/
+      React.createElement(Timer, { type: "minutes", time: this.state.minutes }), /*#__PURE__*/
+      React.createElement(Timer, { type: "seconds", time: this.state.seconds }))));
+
+
+
+  } });
+
+
+var Marker = React.createClass({ displayName: "Marker",
+  render: function () {
+    switch (this.props.type) {
+      case 'hours':
+        var measurement = 24;
+        break;
+      case 'minutes':
+        var measurement = 60;
+        break;
+      case 'seconds':
+        var measurement = 60;
+        break;}
+
+
+    var offset = this.props.time / measurement * 100 + '%';
+    var opacity = this.props.time / measurement * 100 / 100;
+
+    var columnClasses = 'Column Column--' + this.props.type;
+    var typeClasses = 'Marker Marker--' + this.props.type;
+    return /*#__PURE__*/(
+      React.createElement("div", { className: columnClasses }, /*#__PURE__*/
+      React.createElement("div", { className: typeClasses, style: { height: offset, opacity: opacity } })));
+
+
+  } });
+
+
+var Timer = React.createClass({ displayName: "Timer",
+  render: function () {
+    if (this.props.time < 10) {
+      var time = '0' + this.props.time;
+    } else {
+      var time = this.props.time;
+    }
+    return /*#__PURE__*/(
+      React.createElement("div", { className: this.props.type }, time));
+
+  } });
+
+ReactDOM.render( /*#__PURE__*/
+React.createElement(App, null),
+document.getElementById('app'));
+
+</script>
+</body>
+</html>

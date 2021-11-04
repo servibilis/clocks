@@ -4,8 +4,16 @@
 	"analog-3.edge",
 	"analog-4.edge",
 	"analog-5.edge",
+	"analog-6.edge",
+	"analog-7.edge",
+	"analog-8.edge",
+	"analog-9.edge",
+	"analog-10.edge",
 	"digital-1.edge",
 	"digital-2.edge",
 	"digital-3.edge",
-	"weird-1.edge"
+	"digital-4.edge",
+	"digital-5.edge",
+	"digital-6.edge",
+	"digital-7.edge"
 ]

@@ -1,0 +1,407 @@
+// #!/exasol/edge/package/frame
+// #command clock d5
+// #icon fas fa-clock
+// #section command
+// #label clock
+
+// start //
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body class="no-scroll">
+<div class="series-menu"></div>
+<div class="clock">
+  <div class="block" data-num="0"></div>
+  <div class="block" data-num="1"></div>
+  <div class="block" data-num="2"></div>
+  <div class="block" data-num="3"></div>
+  <div class="block" data-num="4"></div>
+  <div class="block" data-num="5"></div>
+  <div class="block" data-num="6"></div>
+  <div class="block" data-num="7"></div>
+  <div class="block" data-num="8"></div>
+  <div class="block" data-num="9"></div>
+  <div class="block" data-num="10"></div>
+  <div class="block" data-num="11"></div>
+  <div class="block" data-num="12"></div>
+  <div class="block" data-num="13"></div>
+  <div class="block" data-num="14"></div>
+  <div class="block" data-num="15"></div>
+  <div class="block" data-num="16"></div>
+  <div class="block" data-num="17"></div>
+  <div class="block" data-num="18"></div>
+  <div class="block" data-num="19"></div>
+  <div class="block" data-num="20"></div>
+  <div class="block" data-num="21"></div>
+  <div class="block" data-num="22"></div>
+  <div class="block" data-num="23"></div>
+  <div class="block" data-num="24"></div>
+  <div class="block" data-num="25"></div>
+  <div class="block" data-num="26"></div>
+  <div class="block" data-num="27"></div>
+  <div class="block" data-num="28"></div>
+  <div class="block" data-num="29"></div>
+  <div class="block" data-num="30"></div>
+  <div class="block" data-num="31"></div>
+  <div class="block" data-num="32"></div>
+  <div class="block" data-num="33"></div>
+  <div class="block" data-num="34"></div>
+  <div class="block" data-num="35"></div>
+  <div class="block" data-num="36"></div>
+  <div class="block" data-num="37"></div>
+  <div class="block" data-num="38"></div>
+  <div class="block" data-num="39"></div>
+  <div class="block" data-num="40"></div>
+  <div class="block" data-num="41"></div>
+  <div class="block" data-num="42"></div>
+  <div class="block" data-num="43"></div>
+  <div class="block" data-num="44"></div>
+  <div class="block" data-num="45"></div>
+  <div class="block" data-num="46"></div>
+  <div class="block" data-num="47"></div>
+  <div class="block" data-num="48"></div>
+  <div class="block" data-num="49"></div>
+  <div class="block" data-num="50"></div>
+  <div class="block" data-num="51"></div>
+  <div class="block" data-num="52"></div>
+  <div class="block" data-num="53"></div>
+  <div class="block" data-num="54"></div>
+  <div class="block" data-num="55"></div>
+  <div class="block" data-num="56"></div>
+  <div class="block" data-num="57"></div>
+  <div class="block" data-num="58"></div>
+  <div class="block" data-num="59"></div>
+  <div class="divider"></div>
+</div>
+
+
+<style>
+body {
+  overflow: hidden;
+  height: 90vh;
+}
+
+.series-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  transform: translateX(-250px);
+  box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.55, 0.54, 0.69, 1.05);
+}
+.series-menu .opaque {
+  position: fixed;
+  width: 0;
+  height: 100%;
+  z-index: -1;
+  transition: background 0.3s ease-in;
+}
+.series-menu * {
+  box-sizing: border-box;
+}
+.series-menu .series-menu-inner {
+  background: #fefefe;
+  height: 100%;
+  overflow: hidden;
+}
+.series-menu .series-menu-content {
+  overflow-y: scroll;
+  width: calc(100% + 14px);
+  height: 100%;
+  padding: 10px 15px;
+}
+.series-menu a {
+  position: relative;
+  width: 100%;
+  text-decoration: none;
+  color: #333;
+}
+.series-menu img {
+  width: 100%;
+}
+.series-menu h1 {
+  margin: 10px 0 0 0;
+  font-weight: 500;
+  font-size: 25px;
+}
+.series-menu h2 {
+  font-size: 18px;
+  margin: 20px 0 8px 0;
+  font-weight: 500;
+}
+.series-menu p {
+  margin: 3px 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+.series-menu button {
+  position: absolute;
+  background: #fefefe;
+  border: none;
+  width: 100px;
+  height: 40px;
+  left: 100%;
+  top: -30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #4ddf98;
+  box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+  transform-origin: bottom left;
+  color: #222;
+  line-height: 36px;
+  font-weight: 400;
+}
+.series-menu button:focus, .series-menu button:hover {
+  outline: none;
+  background: #26d37f;
+}
+.series-menu.reveal {
+  transform: translateX(0);
+}
+.series-menu.reveal .opaque {
+  width: calc(100vw + 250px);
+  background: rgba(0, 0, 0, 0.2);
+}
+.series-menu.reveal button {
+  background: #ff6666;
+}
+.series-menu.reveal button:focus, .series-menu.reveal button:hover {
+  background: #ff4d4d;
+}
+.series-menu.reveal button > span {
+  transform: rotate(45deg);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  transition: 0.4s;
+  font-weight: 300;
+}
+
+.clock {
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  width: 280px;
+  height: 100px;
+}
+
+.block {
+  width: calc(100% / 12);
+  height: 20%;
+  color: #474747;
+  transition: 0.4s;
+}
+.block:not(:nth-child(n+16)):nth-child(n+11), .block:not(:nth-child(n+46)):nth-child(n+41) {
+  margin-right: 10px;
+}
+.block:not(:nth-child(n+31)):nth-child(n+26) {
+  margin-right: 20px;
+}
+.block:before {
+  content: attr(data-num);
+  position: relative;
+  display: block;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  line-height: 20px;
+  text-align: center;
+}
+.block:nth-child(-n+10):before {
+  content: "0" attr(data-num);
+}
+.block.active:before {
+  color: whitesmoke;
+  font-weight: 500;
+}
+.block.second:before {
+  color: #FF8300;
+}
+
+.divider {
+  position: absolute;
+  width: 2px;
+  background-color: whitesmoke;
+  height: 60%;
+  top: 20%;
+  left: calc(50% + 19px);
+}
+
+body.light-theme {
+  background: #e6e6e6;
+}
+body.light-theme .block {
+  outline: 1px solid #dfdfdf;
+  color: #acacac;
+}
+body.light-theme .block.active:before {
+  color: #333;
+}
+body.light-theme .block.second {
+  background: #d4d4d4;
+}
+body.light-theme .block.second:before {
+  color: #333;
+}
+body.light-theme .divider {
+  background: #333;
+}
+
+.switch-theme {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  color: grey;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 30px;
+}
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #333;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+</style>
+<script>
+const numbers = [
+  [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1], // 0
+  [1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1], // 1
+  [1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1], // 2
+  [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1], // 3
+  [1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1], // 4
+  [1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1], // 5
+  [1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1], // 6
+  [1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0], // 7
+  [1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1], // 8
+  [1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1]  // 9
+];
+
+const blocks = [];
+const digits = Array.from(document.querySelectorAll('.block'));
+
+for (let i = 0; i < 4; i++) {
+  blocks.push(digits.slice( i * 15, i * 15 + 15 ));
+}
+
+const setNum = (block, num) => {
+  let n = numbers[num];
+  for (let i = 0; i < block.length; i++) {
+     block[i].classList[ n[i] === 1 ?  'add' : 'remove']('active');
+  }
+};
+
+const time = {
+  s: '',
+  m: '',
+  h: '',
+  p: null
+};
+
+// time loop
+const animator = () => {
+  let d = new Date(),
+     h = d.getHours().toString(),
+     m = d.getMinutes().toString(),
+     s = d.getSeconds().toString();
+  
+  s = s.length === 1 ? '0' + s : s;
+  m = m.length === 1 ? '0' + m : m;
+  h = h.length === 1 ? '0' + h : h;
+  
+  if (s !== time.s) {
+    for (let i = 0; i < digits.length; i++) {
+      let d = digits[i];
+      if (i === +s) {
+        d.classList.add('second');
+        if (time.p !== null)
+          digits[time.p].classList.remove('second');
+        time.p = i;
+        time.s = s;
+      }
+    }
+  }
+  
+  if (m !== time.m) {
+    setNum(blocks[2], m[0]);
+    setNum(blocks[3], m[1]);
+    time.m = m;
+  }
+  
+  if (h !== time.h) {
+    setNum(blocks[0], h[0]);
+    setNum(blocks[1], h[1]);
+    time.h = h;
+  }
+  window.requestAnimationFrame(animator)
+}
+
+// init
+window.requestAnimationFrame(animator)
+
+// toggle button
+window.addEventListener("message", (event) => {
+  if( event.data.type === "theme" ){
+    let dark =  'dark' in event.data;
+    clock.removeClass().addClass(dark === true ? 'dark-theme' : 'light-theme');
+  }
+}, false);
+
+</script>
+</body>
+</html>
